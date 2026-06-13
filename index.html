@@ -1,0 +1,1080 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PRO 1-Bangar Police Station</title>
+  <style>
+    :root {
+      --bg:#8e9999;
+      --text:#1f2d2d;
+    }
+    * { box-sizing: border-box; margin:0; padding:0 }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      text-align: center;
+      transition: background-color 0.6s ease;
+    }
+    header {
+      
+      background: linear-gradient(135deg,#adafb0,#ffffff);
+      color: #0c0a0a;
+      padding: 10px 20px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: .3px;
+    }
+    .sub { margin-top: 6px; font-size: 15px; opacity: .95 }
+    nav {
+      background: #319e3e;
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.1);
+      position: sticky; top: 0; z-index: 10;
+    }
+    nav a {
+      margin-left: 18px; text-decoration: none;
+      font-size: 16px; font-weight: 600;
+      color: #2a2a2a; display: flex; align-items: center; gap: 6px;
+    }
+    nav a:hover { color:#21867a }
+    .wrap { max-width: 1000px; margin: 22px auto 30px; padding: 0 16px }
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+      gap: 14px; margin-top: 18px;
+    }
+    .emotion {
+      border-radius: 16px; padding: 16px 14px;
+      box-shadow: 0 8px 20px rgba(20,40,40,.08);
+      cursor: pointer; transition: transform .15s ease, box-shadow .15s ease;
+      display: flex; flex-direction: column; align-items: center;
+      font-weight: 700; font-size: 15px; color: #fff;
+    }
+    .emotion:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(20,40,40,.2) }
+    .emoji { font-size: 24px; margin-bottom: 6px }
+    #verseBox {
+      margin: 26px auto 8px; max-width: 860px; min-height: 150px;
+      padding: 28px 26px; background: #e0dede; border-radius: 18px;
+      box-shadow: 0 14px 34px rgba(20,40,40,.10);
+      border: 3px solid transparent; line-height: 1.75; transition: all .3s ease;
+    }
+    #verseBox .text { font-style: italic; font-weight: 500; font-size: 25 px }
+    #verseBox .reference { display: block; margin-top: 12px; font-size: 16px; font-weight: 600; font-style: italic }
+    @keyframes popIn {
+      0%{opacity:0; transform:translateY(10px) scale(.98)}
+      100%{opacity:1; transform:translateY(0) scale(1)}
+    }
+    #verseBox.show { animation:popIn .45s ease forwards }
+    footer { margin: 20px 0 28px; color: #567; font-size: 13px }
+    .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center }
+    .modal-content { background: #fff; padding: 28px; border-radius: 14px; max-width: 500px; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,.3); animation: popIn .35s ease }
+    .modal-content h2 { margin-bottom: 10px; font-size: 22px; color: #21867a }
+    .close-btn { float: right; font-size: 22px; font-weight: bold; cursor: pointer; color: #999 }
+    .close-btn:hover { color: #000 }
+  </style>
+</head>
+<body>
+  <header>
+     <!-- La Union Police Provincial Office PRO 1 -->
+<img src="3.png" alt="La Union Police Provincial Office" width="80" height="70">BANGAR PNP     <!-- La Union Police Provincial Office PRO 1 -->
+<img src="4.png" alt="La Union Police Provincial Office" width="60" height="60">
+    <div class="sub">"Your feelings matter — tap one to receive words that guide and uplift."</div>
+    <div class="sub">"SERVICE, HONOR AND JUSTICE"</div>      
+  </header>
+
+  <nav>
+    <a href="javascript:void(0)" onclick="openAbout()">📖 About</a>
+    <a href="javascript:void(0)" onclick="openContact()">👤Contact</a>
+    <!-- New button for Mission, Vision, and Core Values -->
+    <a href="javascript:void(0)" id="openMissionVisionModal">💡 Mission, Vision, & Core Values</a>
+  </nav>
+
+
+ 
+<div class="wrap">
+    <div id="verseBox"><div class="text">A motivation chosen for your heart will appear here.</div></div>
+
+    <div class="grid">
+      <div class="emotion" style="background:#ffb703" onclick="showVerse('Honor')"><span class="emoji">👮🏻‍♂️🎖️</span>Honor</div>
+      <div class="emotion" style="background:#8ecae6" onclick="showVerse('Satisfaction')"><span class="emoji">👮🏻‍♂️😌</span>Satisfaction</div>
+      <div class="emotion" style="background:#90be6d" onclick="showVerse('Camaraderie')"><span class="emoji">👮🏻‍♂️🤝👮🏻‍♂️</span>Camaraderie</div>
+      <div class="emotion" style="background:#e63946" onclick="showVerse('Gratitude')"><span class="emoji">👮🏻‍♂️🙏</span>Gratitude</div>
+      <div class="emotion" style="background:#fb8500" onclick="showVerse('Confidence')"><span class="emoji">👮🏻‍♂️💪</span>Confidence</div>
+      <div class="emotion" style="background:#9d4edd" onclick="showVerse('Stress')"><span class="emoji">👮🏻‍♂️😰</span>Stress</div>
+      <div class="emotion" style="background:#219ebc" onclick="showVerse('Frustration')"><span class="emoji">👮🏻‍♂️😤</span>Frustration</div>
+      <div class="emotion" style="background:#2a9d8f" onclick="showVerse('Fear')"><span class="emoji">👮🏻‍♂️😨</span>Fear</div>
+      <div class="emotion" style="background:#ff006e" onclick="showVerse('Exhaustion')"><span class="emoji">👮🏻‍♂️😮‍💨</span>Exhaustion</div>
+      <div class="emotion" style="background:#06d6a0" onclick="showVerse('Resentment')"><span class="emoji">👮🏻‍♂️😒</span>Resentment</div>
+    </div>
+</div>
+</div>
+    <footer>Be Encourage and Proud as a Member of Bangar Municipal Police Station • JuliosPCadano</footer>   
+    
+  </div>
+
+  <div id="aboutModal" class="modal">
+    <div class="modal-content"> 
+      <span class="close-btn" onclick="closeAbout()">&times;</span>
+      <h2>📖 About</h2>
+      <p><strong>Your emotions are valid. Let us turn them into strength.</strong><p>
+      <p>Every member of the Philippine National Police experiences different emotions every day—pressure, tiredness, challenges, and doubts. But remember: How you feel does not control you; You control how you respond.</p>
+      <p>✨This application is your digital companion. Select the emotion you are feeling right now, and receive immediate motivation that aligns with your oath, your duty, and your honor.</p>
+    </div>
+  </div>
+
+<div id="ContactModal" class="modal">
+    <div class="modal-content"> 
+      <span class="close-btn" onclick="closeContact()">&times;</span>
+      <h2>📖 Contact</h2>
+      <p><strong>Emergency Hotline.</strong><p>
+      <p>09985985159</p>
+      <p>09274210985</p>
+    </div>
+  </div>
+   <!-- New Modal for Mission, Vision, and Core Values -->
+  <div id="missionVisionModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeMissionVisionModal()">&times;</span>
+      <h2>💡 Our Mission, Vision, and Core Values</h2>
+      <div class="modal-body">
+        <h3>Mission</h3>
+        <p>To enforce the law, prevent and control crimes, maintain peace and order, and ensure public safety and internal security with the active support of the community.</p>
+        <h3>Vision</h3>
+        <p> Imploring the aid of Almighty, by 2030, We shall be a highly capable, effective and credible police service working in partnership with a responsive community towards the attainment of a safer place to live, work and do business.</p>
+        <h3>Core Values</h3>
+        <ul>
+          <li><strong>Maka-Diyos:</strong> God-fearing and upholds moral and spiritual principles in all actions.</li>
+          <li><strong>Makabayan:</strong> Patriotic, loyal to the Republic, and committed to serving the Filipino people.</li>
+          <li><strong>Makakatao:</strong> Humane, respects human rights, treats everyone with dignity, and acts with compassion.</li>
+          <li><strong>Makakalikasan:</strong> Protects the environment, conserves natural resources, and promotes ecological balance.</li>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const verses = {
+      "Honor": {
+        list: [
+          {text: "To wear the uniform is to carry a standard that is higher than oneself. Honor is not just what people see; it is what remains when no one is watching.      — Philosophy of Service"},
+{text: "My life is not my own; it belongs to the people I protect. Honor is the price I pay to keep my conscience clean and my duty done.     — The Officer’s Creed"},
+{text: "I would rather lose a battle than lose my integrity. For a police officer, honor is worth more than any rank, medal, or position.     — Core Values of the PNP"},
+{text: "Strength is used to control others, but Honor is used to control oneself. This is the true mark of a guardian of peace.      — Ethics in Law Enforcement"},
+{text: "The uniform fades, the rank changes, but the honor earned through righteous service lasts forever.       — Legacy of Service"},
+{text: "Honor is the compass that guides an officer through darkness. When temptation calls, honor is the voice that says, 'I am better than this."},
+{text: "Being a policeman is not just a job; it is a vow. To break that vow is to lose oneself, but to keep it is to gain honor that no money can buy."},
+{text: "Let your actions speak louder than your words. Let your integrity be your shield and your honor be your sword."},
+{text: "An officer without honor is like a bird without wings—unable to soar and unable to serve their true purpose."},
+{text: "Die with honor, rather than live in shame. That is the promise we make the moment we raise our right hand."},
+{text: "Honor is not given; it is earned every single day through righteous deeds and clean hands."},
+{text: "To wear the uniform is to accept a life where honor matters more than life itself."},
+{text: "Honor is the invisible shield that protects an officer’s soul from corruption."},
+{text: "A policeman’s greatest wealth is not money or power, but an untarnished name."},
+{text: "When duty calls, honor is the reason we stand firm even when fear tells us to run."},
+{text: "Honor means doing the right thing, not because people are watching, but because it is right."},
+{text: "I may lose a fight, I may lose ground, but I will never lose my honor."},
+{text: "The badge represents authority, but the heart represents honor."},
+{text: "Honor is the bridge between who we are and who we promise to be."},
+{text: "Live in such a way that even your enemies respect you—that is true honor."},
+{text: "Service without honor is just labor; service with honor is a mission."},
+{text: "Integrity is doing what is legal, but honor is doing what is right even beyond the law."},
+{text: "My oath is not just words on paper; it is the covenant of my honor."},
+{text: "An officer with honor protects the weak and fears no evil."},
+{text: "Let your service be your legacy, and let your honor be your memory."},
+{text: "Honor demands that we protect the innocent even at the cost of our own safety."},
+{text: "To serve with honor is to serve without expecting anything in return."},
+{text: "Corruption may bring comfort, but only honor brings peace of mind."},
+{text: "The law can be enforced by power, but it is respected by honor."},
+{text: "Honor requires that we admit our mistakes and correct them with courage."},
+{text: "I am a servant of the people; my honor lies in their safety and trust."},
+{text: "Discipline is the path, honor is the destination."},
+{text: "True strength is not in the ability to fight, but in the ability to uphold honor under pressure."},
+{text: "A man’s character is measured by his principles; a policeman’s character is measured by his honor."},
+{text: "Honor is the only thing that cannot be stolen from you—it is yours to keep or yours to lose."},
+{text: "Speak with honesty, act with integrity, live with honor."},
+{text: "When temptation knocks, honor is the door that remains closed."},
+{text: "A clear conscience is the evidence of a life lived with honor."},
+{text: "Do not trade your dignity for convenience, nor your honor for gain."},
+{text: "The highest rank attainable in this service is not General, but being a Man of Honor."},
+{text: "There is no greater honor than to lay down one’s life for the country and the people."},
+{text: "Sacrifice is the price of peace, and honor is the reward of the brave."},
+{text: "I stand in the line of fire so others may sleep in safety—that is my honor."},
+{text: "Death is inevitable, but to die with honor is a choice we make while living."},
+{text: "Honor is not found in avoiding danger, but in facing it for a just cause."},
+{text: "My blood is red, my heart is true, my honor is for you."},
+{text: "To die for the country is a hero’s death; to live for the people is an honor’s life."},
+{text: "The road to honor is often difficult, but it is the only road worth taking."},
+{text: "Let not the difficulties of duty dim the brightness of your honor."},
+{text: "We are the guardians of the night; our honor shines brighter than any star."},
+{text: "Leave behind a legacy of honor, not just a record of service."},
+{text: "Be proud of your uniform, but be prouder of the honor you carry within."},
+{text: "History remembers the brave, but eternity remembers the honorable."},
+{text: "My name is my bond, my service is my honor."},
+{text: "Wear your uniform with pride, but wear your honor with humility."},
+{text: "An officer may retire from duty, but never from honor."},
+{text: "Let your life be an example, and your honor be your monument."},
+{text: "The trust of the people is the highest form of honor we can receive."},
+{text: "Stand tall, for you carry the hopes of the nation and the honor of the uniform."},
+{text: "Always remember: To Serve and Protect with Honor, Justice, and Integrity."},
+{text: "Honor your father and your mother, that your days may be long in the land that the Lord your God is giving you.    - Exodus 20:12"},
+{text: "Honor the Lord with your wealth and with the firstfruits of all your produce.    - Proverbs 3:9"},
+{text: "He who oppresses the poor shows contempt for their Maker, but whoever is kind to the needy honors God.    - Proverbs 14:31"},
+{text: "Whoever pursues righteousness and kindness will find life, righteousness and honor.    - Proverbs 21:21"},
+{text: "You shall stand up before the gray head and honor the face of an old man, and you shall fear your God: I am the Lord.    - Leviticus 19:32"},
+{text: "Be devoted to one another in love. Honor one another above yourselves.    - Romans 12:10"},
+{text: "Give to everyone what you owe them: If you owe taxes, pay taxes; if revenue, then revenue; if respect, then respect; if honor, then honor.    - Romans 13:7"},
+{text: "The elders who direct the affairs of the church well are worthy of double honor, especially those whose work is preaching and teaching.    - 1 Timothy 5:17"},
+{text: "Let marriage be held in honor among all, and let the marriage bed be undefiled, for God will judge the sexually immoral and adulterous.    - Hebrews 13:4"},
+{text: "You are worthy, our Lord and God, to receive glory and honor and power, for you created all things, and by your will they were created and have their being.    - Revelation 4:11"},
+{text: "That all may honor the Son just as they honor the Father. Whoever does not honor the Son does not honor the Father, who sent him.    - John 5:23"},
+{text: "If I honor myself, my honor means nothing. My Father is the one who honors me.    - John 8:54"},,
+{text: "A prophet is not without honor except in his own town, among his relatives and in his own home.    - Mark 6:4"},
+{text: "The wise inherit honor, but fools get only shame.    - Proverbs 3:35"},
+{text: "It is not good to be partial to the wicked or to deprive the innocent of justice.    - Proverbs 18:5"},
+{text: "By wisdom a house is built, and through understanding it is established; through knowledge its rooms are filled with rare and beautiful treasures.    - Proverbs 24:3-4"},
+{text: "Likewise, husbands, live with your wives in an understanding way, showing honor to the woman as the weaker vessel, since they are heirs with you of the grace of life, so that your prayers may not be hindered.    - 1 Peter 3:7"},
+{text: "Honor and majesty are before him; strength and joy are in his dwelling place.    - 1 Chronicles 16:27"},
+{text: "The Lord is my strength and my shield; my heart trusts in him, and he helps me. My heart leaps for joy, and with my song I praise him.    - Psalm 28:7"},
+{text: "Splendor and majesty are before him; strength and beauty are in his sanctuary.    - Psalm 96:6"},
+{text: "The fear of the Lord is the beginning of wisdom, and knowledge of the Holy One is understanding.    - Proverbs 9:10"},
+{text: "For great is your love, reaching to the heavens; your faithfulness reaches to the skies.    - Psalm 57:10"},
+{text: "I will praise you, Lord, among the nations; I will sing of you among the peoples.    - Psalm 108:3"},
+{text: "The memory of the righteous is a blessing, but the name of the wicked will rot.    - Proverbs 10:7"},
+{text: "A good name is more desirable than great riches; to be esteemed is better than silver or gold.    - Proverbs 22:1"},
+        ], color: "#ffb703"
+      },
+      "Satisfaction": {
+        list: [
+          {text: "There is no greater satisfaction than seeing a community safe and peaceful because you were there."},
+{text: "Every crime solved, every life saved, every help given—these are the treasures that fill my heart with satisfaction."},
+{text: "Satisfaction is the quiet smile I carry when I know I have done my duty to the best of my ability."},
+{text: "To serve is not just a job; it is a privilege that brings a satisfaction no money can buy."},
+{text: "The gratitude of the people is the sweetest reward and the deepest source of satisfaction."},
+{text: "I find satisfaction not in being praised, but in knowing I have made a difference."},
+{text: "Every day I wear this uniform, I find satisfaction in being a guardian of hope."},
+{text: "Satisfaction is knowing that my efforts contribute to a better and safer nation."},
+{text: "To see justice served is the ultimate satisfaction for a policeman’s soul."},
+{text: "I may be tired at the end of the day, but my heart is full of satisfaction for a day well spent."},
+{text: "Satisfaction is the peace of mind that comes from a clear conscience and honest service."},
+{text: "Success is measured by others, but satisfaction is felt deep within you.      — PNP Philosophy"},
+{text: "There is satisfaction in knowing I stood for what is right, even when it was hard."},
+{text: "My satisfaction lies in living a life that is true to my oath and my values."},
+{text: "To sleep soundly at night knowing the people are safe—that is true satisfaction."},
+{text: "Satisfaction is not found in rank or position, but in the quality of service you give."},
+{text: "I am satisfied because I know I am where I am meant to be—serving my country."},
+{text: "The satisfaction of duty done is better than any medal or recognition."},
+{text: "Find satisfaction in the journey, not just the destination. Every step matters."},
+{text: "A life dedicated to others brings a satisfaction that lasts forever."},
+{text: "Even the smallest act of kindness brings great satisfaction to a heart that serves."},
+{text: "I find satisfaction in helping someone stand up again after they have fallen."},
+{text: "AEvery problem solved, every conflict resolved—these are moments of pure satisfaction."},
+{text: "Satisfaction is seeing a child smile because they feel safe with you around."},
+{text: "There is joy and satisfaction in being the light in someone’s darkest hour."},
+{text: "Do not wait for big achievements to feel satisfied. Find joy in every small task well done."},
+{text: "The satisfaction of protecting the innocent is worth all the sacrifices."},
+{text: "I am satisfied because I know I have used my strength for good."},
+{text: "Satisfaction is the reward we give ourselves for staying true to our mission."},
+{text: "To be trusted by the people is the highest honor and the greatest satisfaction."},
+{text: "My life has meaning, my work has purpose—this is the source of my satisfaction."},
+{text: "Satisfaction is knowing that my life matters to the nation and to the people."},
+{text: "I chose this path not for glory, but for the deep satisfaction of serving others."},
+{text: "There is satisfaction in facing challenges and overcoming them with courage."},
+{text: "To serve with love brings a satisfaction that fills the soul completely."},
+{text: "My satisfaction comes from knowing I leave this world a little better than I found it."},
+{text: "No matter how hard the day is, satisfaction awaits those who never give up."},
+{text: "Satisfaction is the fuel that keeps me going, even when the road is tough."},
+{text: "I am a policeman, and I am satisfied with the noble mission I have chosen."},
+{text: "True satisfaction is found in giving your best, not in getting the most."},
+{text: "I am satisfied with who I am and what I do—this is my strength."},
+{text: "Satisfaction is not having everything you want, but wanting what you have: the chance to serve."},
+{text: "Leave behind a legacy of service, and you will live in satisfaction forever."},
+{text: "There is satisfaction in growing as an officer and as a person every day."},
+{text: "Be proud of your work, and satisfaction will naturally follow."},
+{text: "Satisfaction is knowing that you have done everything you could for the common good."},
+{text: "I wear this badge with pride and carry this service with satisfaction."},
+{text: "The best feeling in the world is the satisfaction of a duty faithfully performed."},
+{text: "Live each day with purpose, and you will end each day with satisfaction."},
+{text: "To Serve and Protect with all my heart—this is my life, my joy, and my satisfaction."},
+{text: "Whoever follows righteousness and kindness finds life, righteousness, and satisfaction.    - Proverbs 21:21"},
+{text: "He satisfies your desires with good things so that your youth is renewed like the eagle’s.    - Psalm 103:5"},
+{text: "My soul will be satisfied as with the richest of foods; with singing lips my mouth will praise you.    - Psalm 63:5"},
+{text: "You open your hand and satisfy the desires of every living thing.    - Psalm 145:16"},
+{text: "They will be fully satisfied by the abundance of your house; you give them drink from your river of delights.    - Psalm 36:8"},
+{text: "The righteous eat to their hearts’ content, but the stomach of the wicked goes hungry.    - Proverbs 13:25"},
+{text: "I have learned to be content whatever the circumstances.    - Philippians 4:11"},
+{text: "Blessed are those who hunger and thirst for righteousness, for they will be filled.    - Matthew 5:6"},
+{text: "The fear of the Lord leads to life; then one rests content, untouched by trouble.    - Proverbs 19:23"},
+{text: "Lord, you alone are my portion and my cup; you make my lot secure.    - Psalm 16:5"},
+{text: "With long life I will satisfy him and show him my salvation.    - Psalm 91:16"},
+{text: "The work of righteousness will be peace, and the effect of righteousness, quietness and assurance forever.    - Isaiah 32:17"},
+{text: "My people will live in peaceful dwelling places, in secure homes, in undisturbed places of rest.    - Isaiah 32:18"},
+{text: "You have made known to me the paths of life; you will fill me with joy in your presence, with eternal pleasures at your right hand.    - Acts 2:28"},
+{text: "The Lord is my shepherd, I lack nothing.    - Psalm 23:1"},
+{text: "I will be fully satisfied when I awake in your likeness.    - Psalm 17:15"},
+{text: "Those who sow in tears will reap with songs of joy.    - Psalm 126:5"},
+{text: "Take delight in the Lord, and he will give you the desires of your heart.    - Psalm 37:4"},
+{text: "Better is a little with the fear of the Lord than great wealth with turmoil.    - Proverbs 15:16"},
+{text: "To the person who pleases him, God gives wisdom, knowledge and happiness, but to the sinner he gives the task of gathering and storing up wealth to hand it over to the one who pleases God.    - Ecclesiastes 2:26"},
+        ], color: "#8ecae6"
+      },
+      "Camaraderie": {
+        list: [
+          
+  {text: "We are not just colleagues; we are brothers and sisters bound by oath, blood, and sacrifice."},
+  {text: "Camaraderie is the invisible chain that links our hearts, making us stronger together than alone."},
+  {text: "In the PNP, no one is left behind. We stand side by side, fight side by side, and win side by side."},
+  {text: "The uniform makes us look alike, but camaraderie makes us feel like one family."},
+  {text: "A true comrade knows your strength, understands your weakness, and never lets you fall."},
+  {text: "We share the same danger, the same duty, and the same dream—that is the power of camaraderie."},
+  {text: "Camaraderie is not just about being together; it is about being there for each other no matter what."},
+  {text: "When you wear the same badge, you carry the same burden and share the same glory."},
+  {text: "Our bond is forged in fire, tested in battle, and lasts a lifetime."},
+  {text: "One team, one dream, one family. That is what camaraderie means to us."},
+  {text: "Unity is our shield, camaraderie is our strength. Together, we are invincible."},
+  {text: "Many hands make light work, but many hearts make great service."},
+  {text: "Camaraderie turns a group of individuals into a powerful force for good."},
+  {text: "We may come from different places, but we walk the same path with the same purpose."},
+  {text: "In unity there is strength, in camaraderie there is hope."},
+  {text: "A chain is only as strong as its weakest link, so we lift each other up."},
+  {text: "When we work as one, no challenge is too big and no mission is impossible."},
+  {text: "Camaraderie is the fuel that keeps our team moving forward, even when the road is tough."},
+  {text: "Different faces, same voice; different ranks, same heart."},
+  {text: "Together we stand, divided we fall. Camaraderie keeps us standing tall."},
+  {text: "Trust is the foundation of camaraderie. I trust you with my life, as you trust me with yours."},
+  {text: "In times of trouble, a comrade’s hand is the first to reach out and the last to let go."},
+  {text: "We celebrate each other’s victories and comfort each other in sorrow."},
+  {text: "Camaraderie means knowing that someone has your back, always and forever."},
+  {text: "A friend is someone who knows you, but a comrade is someone who understands you without words."},
+  {text: "We share our food, our stories, and our fears. That is how we build a bond that never breaks."},
+  {text: "When you are tired, we carry you. When you are weak, we strengthen you."},
+  {text: "Respect begets respect, and camaraderie begets loyalty"},
+  {text: "There is no greater comfort than knowing you are not alone in this journey."},
+  {text: "We build each other up, not tear each other down. That is the way of the PNP."},
+  {text: "Camaraderie is working together toward one goal: To Serve and Protect."},
+  {text: "Our mission is common, our dedication is shared, our success is collective."},
+  {text: "We do not serve for ourselves; we serve as one team for one nation."},
+  {text: "Camaraderie makes the heavy load lighter and the long journey shorter."},
+  {text: "When we harmonize our efforts, we create a symphony of peace and order."},
+  {text: "Every officer is a piece of the puzzle, and together we complete the picture of safety."},
+  {text: "Camaraderie is the spirit that makes us put the team before self."},
+  {text: "We fight not for glory, but for the safety of our people and the honor of our group."},
+  {text: "One heartbeat, one mission, one family in service."},
+  {text: "Camaraderie is the bridge that connects our individual duties to the greater good."},
+  {text: "Camaraderie is a tradition passed down from generation to generation of police officers."},
+  {text: "We honor those who came before us by being good comrades to those who stand with us now."},
+  {text: "The bond we build today will be the legacy we leave tomorrow."},
+  {text: "In the PNP, camaraderie is not just a value; it is a way of life."},
+  {text: "Let us be the kind of comrades that others will look up to and remember fondly."},
+  {text: "Time may pass and ranks may change, but the friendship between comrades remains forever."},
+  {text: "We are guardians not just of the law, but of each other’s well-being."},
+  {text: "Camaraderie is the light that shines brightest in the darkest hours of duty."},
+  {text: "Live as comrades, fight as warriors, serve as brothers and sisters."},
+  {text: "Always remember: Walang iwanan (No one gets left behind). That is the true spirit of PNP camaraderie."},
+  {text: "Two are better than one, because they have a good reward for their labor. For if one falls, his companion lifts him up.    - Ecclesiastes 4:9-10"},
+{text: "How good and how pleasant it is when brothers dwell together in unity!    - Psalm 133:1"},
+{text: "Bear one another’s burdens, and so fulfill the law of Christ.    - Galatians 6:2"},
+{text: "Be devoted to one another in brotherly love; give preference to one another in honor.    - Romans 12:10"},
+{text: "Therefore encourage one another and build each other up, just as you are already doing.    - 1 Thessalonians 5:11"},
+{text: "Make every effort to keep the unity of the Spirit in the bond of peace.    - Ephesians 4:3"},
+{text: "As iron sharpens iron, so one person sharpens another.    - Proverbs 27:17"},
+{text: "Let us consider how to stir up one another to love and good works, not neglecting to meet together, but encouraging one another.    - Hebrews 10:24-25"},
+{text: "We who are strong ought to bear with the weaknesses of the weak, and not to please ourselves.    - Romans 15:1"},
+{text: "If one part suffers, every part suffers with it; if one part is honored, every part rejoices with it.    - 1 Corinthians 12:26"},
+{text: "A friend loves at all times, and a brother is born for adversity.    - Proverbs 17:17"},
+{text: "Finally, all of you, be like-minded, be sympathetic, love one another, be compassionate and humble.    - 1 Peter 3:8"},
+{text: "Walk in unity, standing firm in one spirit, with one mind striving side by side for the faith of the gospel.    - Philippians 1:27"},
+{text: "Though one may be overpowered, two can defend themselves. A cord of three strands is not quickly broken.    - Ecclesiastes 4:12"},
+{text: "And let us not grow weary of doing good, for in due season we will reap, if we do not give up.    - Galatians 6:9"},
+{text: "But you be watchful in all things, endure afflictions, do the work of an evangelist, fulfill your ministry.    - 2 Timothy 4:5"},
+{text: "So we, being many, are one body in Christ, and individually members of one another.    - Romans 12:5"},
+{text: "And over all these virtues put on love, which binds them all together in perfect unity.    - Colossians 3:14"},
+{text: "Strengthening the souls of the disciples, encouraging them to continue in the faith, and saying that through many tribulations we must enter the kingdom of God.    - Acts 14:22"},
+{text: "Peace be to the brothers, and love with faith, from God the Father and the Lord Jesus Christ.    - Ephesians 6:23"},
+        ], color: "#90be6d"
+      },
+      "Gratitude": {
+        list: [
+            {text:"I thank God every day for giving me the strength, courage, and wisdom to wear this uniform and serve."},
+{text:"Every mission accomplished is a blessing, and every safe return home is a miracle I am grateful for."},
+{text:"Lord, thank You for trusting me with the safety of Your people. It is the greatest honor I could ever receive."},
+{text:"In times of danger, I feel Your presence. Thank You for being my shield and my guide."},
+{text:"I am grateful for the gift of life, and I promise to use it to protect others as You have protected me."},
+{text:"Thank You, God, for the opportunity to be an instrument of peace and order in this world."},
+{text:"My strength comes from above, and my gratitude goes to heaven."},
+{text:"Even in the darkest nights, I am thankful for the light of faith that keeps me going."},
+{text:"Thank You for the challenges that make me stronger and the victories that keep me humble."},
+{text:"All glory and thanks be to God, for without Him, I am nothing."},
+{text:"To the Filipino people: Thank you for trusting me with your safety. Your trust is my greatest motivation."},
+{text:"I am grateful for every smile, every 'thank you', and every act of kindness shown to me by the public."},
+{text:"Serving you is not just my duty, it is my privilege. Thank you for allowing me to be of service."},
+{text:"Your safety is my priority, and your happiness is my reward. Thank you for being the reason I serve."},
+{text:"I am thankful for the opportunity to make a difference in your lives, no matter how small."},
+{text:"The trust you give me is heavier than any medal, and I am grateful to carry it with honor."},
+{text:"Thank you for understanding our sacrifices and supporting our mission."},
+{text:"Every life saved, every crime solved, every help given—all are for you, and I am grateful to be part of it."},
+{text:"I serve with all my heart because I know you deserve nothing less. Thank you for your faith in me."},
+{text:"The people are why we exist. I am forever grateful to be their servant and protector."},
+{text:"To my brothers and sisters in the PNP: Thank you for having my back, always and forever."},
+{text:"We stand together, fight together, and win together. Thank you for being my family in uniform."},
+{text:"I am grateful for the bond we share—stronger than steel, deeper than blood."},
+{text:"Thank you for sharing the burden, the joy, and the journey with me."},
+{text:"To my leaders: Thank you for guiding me, teaching me, and believing in me."},
+{text:"To my subordinates: Thank you for your hard work, dedication, and loyalty. We are one team."},
+{text:"To my family: Thank you for your love, patience, and sacrifice. You are my strength and my inspiration."},
+{text:"I may be away from home often, but your support keeps me going. Thank you for understanding."},
+{text:"Thank you to everyone who helped me become the officer I am today."},
+{text:"No one succeeds alone. I am grateful for every hand that helped me rise."},
+{text:"I am grateful for the chance to wear this uniform and live a life of purpose."},
+{text:"Every day in service is a gift. I thank God and the nation for this privilege."},
+{text:"Thank you for the lessons learned, the experiences gained, and the person I have become."},
+{text:"I am grateful for the challenges that tested my character and the victories that rewarded my effort."},
+{text:"This job is not easy, but it is meaningful. I am thankful for every moment of it."},
+{text:"Thank you for allowing me to serve my country and contribute to its peace and progress."},
+{text:"I am grateful for the trust placed in me by the organization and the people."},
+{text:"Every sunrise brings a new opportunity to serve. I am thankful for another day to do good."},
+{text:"Thank you for the honor of being called a policeman—it is a title I treasure deeply."},
+{text:"I look back with gratitude and forward with hope, ready to serve more."},
+{text:"Gratitude is not just a feeling; it is a way of life. I show it by serving with all my heart."},
+{text:"The best way to say thank you is to do my duty well and with integrity."},
+{text:"I am grateful, so I give more, I work harder, and I serve better."},
+{text:"Thank you is not enough, but it is the start of a lifetime of service."},
+{text:"Gratitude makes us humble, and humility makes us better officers."},
+{text:"I carry gratitude in my heart wherever I go, whatever I do."},
+{text:"Thank you for life, for duty, for honor, and for the chance to make a difference."},
+{text:"A grateful officer is a happy officer, and a happy officer serves best."},
+{text:"I am thankful for everything I have, and I use it all for the good of others."},
+{text:"To Serve and Protect with a grateful heart—this is my promise, my life, and my joy."},{text: "Give thanks in all circumstances; for this is God’s will for you in Christ Jesus.    - 1 Thessalonians 5:18"},
+{text: "Give thanks to the Lord, for He is good; His love endures forever.    - Psalm 107:1"},
+{text: "Enter His gates with thanksgiving and His courts with praise; give thanks to Him and praise His name.    - Psalm 100:4"},
+{text: "Always giving thanks to God the Father for everything, in the name of our Lord Jesus Christ.    - Ephesians 5:20"},
+{text: "And whatever you do, whether in word or deed, do it all in the name of the Lord Jesus, giving thanks to God the Father through Him.    - Colossians 3:17"},
+{text: "I thank my God every time I remember you.    - Philippians 1:3"},
+{text: "Let the peace of Christ rule in your hearts... And be thankful.    - Colossians 3:15"},
+{text: "Offer to God a sacrifice of thanksgiving, and perform your vows to the Most High.    - Psalm 50:14"},
+{text: "Now our God, we give You thanks and praise Your glorious name.    - 1 Chronicles 29:13"},
+{text: "The Lord is my strength and my shield; my heart trusts in Him, and He helps me. My heart leaps for joy, and with my song I praise Him.    - Psalm 28:7"},
+{text: "I will give thanks to You, Lord, with all my heart; I will tell of all Your wonderful deeds.    - Psalm 9:1"} ,
+{text: "Sing to the Lord with grateful praise; make music to our God on the harp.    - Psalm 147:7"},
+{text: "Rooted and built up in Him, strengthened in the faith as you were taught, and overflowing with thankfulness.    - Colossians 2:7"},
+{text: "Thanks be to God for His indescribable gift!    - 2 Corinthians 9:15"},
+{text: "It is good to give thanks to the Lord, and to sing praises to Your name, O Most High.    - Psalm 92:1"} ,
+{text: "Every good and perfect gift is from above, coming down from the Father of the heavenly lights.    - James 1:17"},
+{text: "We always thank God, the Father of our Lord Jesus Christ, when we pray for you.    - Colossians 1:3"},
+{text: "Through Jesus, therefore, let us continually offer to God a sacrifice of praise—the fruit of lips that openly profess His name.    - Hebrews 13:15"},
+{text: "Let us come before Him with thanksgiving and extol Him with music and song.    - Psalm 95:2"},
+{text: "For everything God created is good, and nothing is to be rejected if it is received with thanksgiving.    - 1 Timothy 4:4"},
+        ], color: "#e63946"
+      },
+      "Confidence": {
+        list: [
+  {text:"Confidence is the armor that makes me stand firm against any challenge."},
+{text:"I trust my training, my skills, and my ability to do what is right."},
+{text:"When I wear this uniform, I carry the confidence to protect and serve with pride."},
+{text:"Doubt has no place in my heart, for I know I am capable and strong."},
+{text:"My confidence comes not from being perfect, but from being prepared."},
+{text:"I walk with my head high, knowing I have the power to make a difference."},
+{text:"Confidence is not arrogance; it is the quiet assurance that I can handle whatever comes my way."},
+{text:"I believe in myself, and that belief gives me the strength to lead and to serve."},
+{text:"No obstacle is too big when I have confidence in my purpose and my mission."},
+{text:"I am ready, I am able, and I am confident in the path I have chosen."},
+{text:"My confidence is built on honor, discipline, and the trust of the people."},
+{text:"Even in the face of danger, I remain calm and confident, for I know what I must do."},
+{text:"Confidence is the fuel that keeps me going when the road gets tough."},
+{text:"I trust my instincts and my judgment, for they are guided by years of service and experience."},
+{text:"I am a guardian of peace, and I carry the confidence to fulfill that duty with excellence."},
+{text:"My confidence shines through in every action, every word, and every decision I make."},
+{text:"I do not fear failure, for I know that every challenge is an opportunity to grow stronger."},
+{text:"Confidence is knowing that I am part of something bigger than myself, and that gives me power."},
+{text:"I stand tall, not because I am better than others, but because I believe in what I do."},
+{text:"My confidence is my greatest asset, and I use it to inspire trust and respect."},
+{text:"I am prepared, I am capable, and I am confident in my role as a protector."},
+{text:"Confidence is the light that guides me through darkness and uncertainty."},
+{text:"I trust in my team, and I trust in myself—together, we are unstoppable."},
+{text:"My confidence comes from knowing that I serve with integrity and honor."},
+{text:"I face every situation with courage and confidence, for I am a servant of the people."},
+{text:"Confidence is not about being loud; it is about being sure of who you are and what you stand for."},
+{text:"I have trained hard, I have learned well, and I am confident in my ability to serve."},
+{text:"My confidence is rooted in my faith, my values, and my love for my country."},
+{text:"I do not need approval to be confident; I know my worth and my purpose."},
+{text:"Confidence is the key that unlocks my full potential as an officer and as a person."},
+{text:"I walk into every situation with confidence, knowing that I am doing my best for the common good."},
+{text:"My confidence is contagious, and it gives hope to those I protect."},
+{text:"I am strong, I am capable, and I am confident in the mission entrusted to me."},
+{text:"Confidence is the foundation of every successful operation and every act of service."},
+{text:"I trust in the training I have received and the lessons I have learned along the way."},
+{text:"My confidence allows me to make quick decisions and act with precision when it matters most."},
+{text:"I am proud of who I am and what I do, and that pride gives me unshakable confidence."},
+{text:"Confidence is knowing that even when things get hard, I will not give up."},
+{text:"I carry the confidence of someone who knows that their work matters and makes a difference."},
+{text:"My confidence is built on respect—respect for the law, respect for others, and respect for myself."},
+{text:"I face every day with a confident heart, ready to serve and protect with all my might."},
+{text:"Confidence is not something you are born with; it is something you build through effort and experience."},
+{text:"I believe in my ability to overcome any challenge and achieve any goal."},
+{text:"My confidence is my shield, my strength, and my guide in every moment of duty."},
+{text:"I am confident not because I know everything, but because I am willing to learn and adapt."},
+{text:"Confidence is the attitude that turns obstacles into opportunities and dreams into reality."},
+{text:"I stand firm in my convictions and confident in my actions, for I am a police officer."},
+{text:"My confidence comes from knowing that I am not alone—God is with me, and my people are with me."},
+{text:"I wear my uniform with confidence, knowing that it represents hope, safety, and justice."},
+{text:"Confidence is the power that enables me to serve with passion, courage, and excellence every single day."},
+{text: "For the Lord will be your confidence, and will keep your foot from being caught.    - Proverbs 3:26"},
+{text: "I can do all things through Christ who strengthens me.    - Philippians 4:13"},
+{text: "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.    - Joshua 1:9"},
+{text: "So we say with confidence, 'The Lord is my helper; I will not be afraid. What can mere mortals do to me?'    - Hebrews 13:6"},
+{text: "For God has not given us a spirit of fear, but of power and of love and of a sound mind.    - 2 Timothy 1:7"},
+{text: "The Lord is my strength and my shield; my heart trusts in Him, and I am helped.    - Psalm 28:7"},
+{text: "Though an army besiege me, my heart will not fear; though war break out against me, even then I will be confident.    - Psalm 27:3"} ,
+{text: "In God I trust and am not afraid. What can man do to me?    - Psalm 56:11"},
+{text: "Trust in the Lord forever, for the Lord God is an everlasting rock.    - Isaiah 26:4"},
+{text: "Such confidence we have through Christ before God. Not that we are competent in ourselves to claim anything for ourselves, but our competence comes from God.    - 2 Corinthians 3:4-5"} ,
+{text: "Be on your guard; stand firm in the faith; be courageous; be strong.    - 1 Corinthians 16:13"},
+{text: "The Lord himself goes before you and will be with you; He will never leave you nor forsake you. Do not be afraid; do not be discouraged.    - Deuteronomy 31:8"},
+{text: "When I am afraid, I put my trust in You.    - Psalm 56:3"},
+{text: "Commit your work to the Lord, and your plans will be established.    - Proverbs 16:3"},
+{text: "I remain confident of this: I will see the goodness of the Lord in the land of the living.    - Psalm 27:13"},
+{text: "He will cover you with his feathers, and under his wings you will find refuge; his faithfulness will be your shield and rampart.    - Psalm 91:4"},
+{text: "Being confident of this, that He who began a good work in you will carry it on to completion until the day of Christ Jesus.    - Philippians 1:6"},
+{text: "In Him and through faith in Him we may approach God with freedom and confidence.    - Ephesians 3:12"},
+{text: "The Lord will fulfill his purpose for me; your steadfast love, O Lord, endures forever.    - Psalm 138:8"},
+{text: "You will keep in perfect peace those whose minds are steadfast, because they trust in You.    - Isaiah 26:3"},
+        ], color: "#fb8500"
+      },
+      "Stress": {
+        list: [
+  {text:"Pressure is not a burden, but the fire that forges my strength and character."},
+{text:"Every stressful moment is an opportunity to prove how capable and resilient I truly am."},
+{text:"I do not let stress control me; I use it as fuel to perform better and serve harder."},
+{text:"A calm mind in the middle of chaos is the mark of a true guardian of peace."},
+{text:"Stress is just a signal that I am pushing my limits and growing beyond them."},
+{text:"I breathe deeply, I focus clearly, and I turn pressure into positive action."},
+{text:"The harder the challenge, the more I discover the power hidden within me."},
+{text:"Stress cannot break me, because I am built on discipline, faith, and purpose."},
+{text:"I choose to see difficulties as stepping stones, not stumbling blocks."},
+{text:"My ability to stay calm under pressure is my greatest asset in this service."},
+{text:"Every task, no matter how heavy, is a chance to show my dedication and excellence."},
+{text:"I am stronger than my worries, and bigger than any problem I face."},
+{text:"Stress is temporary, but the strength I gain from overcoming it lasts forever."},
+{text:"I do not rush; I work with purpose, and peace follows every action I take."},
+{text:"When things get tough, I remember why I started—serving the people is worth every effort."},
+{text:"My mind is my fortress, and I keep it peaceful even when the world around me is busy."},
+{text:"Pressure makes diamonds, and it makes better police officers too."},
+{text:"I handle stress by taking it one step at a time, and one breath at a time."},
+{text:"I trust in my training and my experience—they have prepared me for anything."},
+{text:"Stress is not a stop sign; it is a speed bump that makes me more careful and focused."},
+{text:"I turn anxiety into action, and worry into wisdom."},
+{text:"The more I serve, the more I learn to balance my work and my peace of mind."},
+{text:"I am not overwhelmed; I am just challenged, and challenges make me grow."},
+{text:"My peace comes from knowing I am doing my best, and that is enough."},
+{text:"Stress tests my character, and I pass with honor and grace."},
+{text:"I carry a light heart even when I carry heavy responsibilities."},
+{text:"Every day is a new chance to manage my energy and my emotions positively."},
+{text:"I do not let stress steal my joy or my passion for service."},
+{text:"When pressure rises, my determination rises even higher."},
+{text:"I am the master of my mind, and I choose calm over chaos."},
+{text:"Stress is part of the journey, but it does not define the destination."},
+{text:"I find strength in silence, and clarity in every deep breath I take."},
+{text:"My resilience is built every time I face stress and overcome it with a smile."},
+{text:"I work hard, but I also rest well—balance is the secret to lasting strength."},
+{text:"No amount of work can tire a heart that is filled with purpose and love."},
+{text:"I see stress as a teacher that shows me where I can improve and grow."},
+{text:"I stay focused on the solution, not the problem, and stress loses its power."},
+{text:"My confidence grows stronger every time I successfully navigate a difficult situation."},
+{text:"I am proud of how I handle pressure—it shows the kind of officer I am."},
+{text:"Stress may come and go, but my commitment to serve remains unshaken."},
+{text:"I transform tension into action, and challenges into achievements."},
+{text:"A peaceful mind is the best tool a police officer can have."},
+{text:"I do not fight stress; I flow with it and turn it into positive energy."},
+{text:"Every stressful day ends with a lesson learned and a strength gained."},
+{text:"I am capable, I am ready, and I am in control of how I feel."},
+{text:"Pressure is just proof that I am doing something important and meaningful."},
+{text:"I keep my heart light and my mind sharp, no matter how heavy the day is."},
+{text:"Stress cannot dim my light; instead, it makes it shine even brighter."},
+{text:"I face every challenge with courage, and every task with joy."},
+{text:"To Serve and Protect with a calm and strong heart—this is my way."},
+{text: "Anxiety weighs down the heart, but a good word brings cheer and strength.    - Proverbs 12:25"},
+{text: "Cast your burden on the Lord, and H,e will sustain you; He will never let the righteous be shaken.    - Psalm 55:22"},
+{text: "Come to Me, all you who labor and are heavy laden, and I will give you rest.    - Matthew 11:28"},
+{text: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.    - Philippians 4:6-7"},
+{text: "Cast all your anxiety on Him because He cares for you.    - 1 Peter 5:7"},
+{text: "God is our refuge and strength, an ever-present help in trouble.    - Psalm 46:1"},
+{text: "Peace I leave with you; My peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.    - John 14:27"},
+{text: "When cares increase within me, Your comfort brings joy to my soul.    - Psalm 94:19"},
+{text: "Do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.    - Matthew 6:34"},
+{text: "Fear not, for I am with you; be not dismayed, for I am your God. I will strengthen you, yes, I will help you, I will uphold you with My righteous right hand.    - Isaiah 41:10"},
+{text: "The Lord is near to all who call on Him, to all who call on Him in truth.    - Psalm 145:18"},
+{text: "You will keep in perfect peace those whose minds are steadfast, because they trust in You.    - Isaiah 26:3"},
+{text: "The Lord is my strength and my shield; my heart trusts in Him, and I am helped.    - Psalm 28:7"},
+{text: "In the day of trouble He will keep me safe in His shelter; He will hide me in the shelter of His tabernacle and set me high upon a rock.    - Psalm 27:5"},
+{text: "I have told you these things, so that in Me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.    - John 16:33"},
+{text: "Commit your way to the Lord; trust in Him and He will do this.    - Psalm 37:5"},
+{text: "The eternal God is your refuge, and underneath are the everlasting arms.    - Deuteronomy 33:27"},
+{text: "We are hard pressed on every side, but not crushed; perplexed, but not in despair.    - 2 Corinthians 4:8"},
+{text: "Let us then approach God’s throne of grace with confidence, so that we may receive mercy and find grace to help us in our time of need.    - Hebrews 4:16"},
+{text: "The joy of the Lord is your strength.    - Nehemiah 8:10"},
+        ], color: "#9d4edd"
+      },
+      "Frustration": {
+        list: [
+  {text:"Frustration is simply the signal that I care deeply about making things right."},
+{text:"I do not let anger rule me; I use frustration as fuel to work harder for justice."},
+{text:"Every difficulty I face is an opportunity to practice patience and strengthen my character."},
+{text:"When things do not go my way, I adjust my strategy, not my purpose."},
+{text:"Frustration is temporary, but the peace I bring to the community is forever."},
+{text:"I channel my energy into solving problems, not into complaining about them."},
+{text:"Slow progress is still progress, and I am grateful for every step forward."},
+{text:"My calmness in difficult situations is what makes me a true professional."},
+{text:"I understand that change takes time, and I am willing to wait and work for it."},
+{text:"Frustration teaches me empathy and helps me understand the people I serve better."},
+{text:"I do not give up when things get hard; I dig deeper and find new strength."},
+{text:"Every obstacle is just a test to see how badly I want to serve and protect."},
+{text:"I turn disappointment into determination and challenges into victories."},
+{text:"My duty is to serve, not to be frustrated by things I cannot control."},
+{text:"I focus on what I can do, and leave the rest to God and time."},
+{text:"Frustration is not a weakness; it is proof that I have a heart that feels and cares."},
+{text:"I breathe, I reflect, and I move forward with renewed purpose."},
+{text:"Even when the system is slow, my integrity and dedication remain fast and true."},
+{text:"I am here to make a difference, one small good action at a time."},
+{text:"Frustration cannot break my spirit; it only polishes it like a diamond."},
+{text:"I choose to be part of the solution, not the source of the problem."},
+{text:"Every day brings a new chance to fix what is wrong and help what is broken."},
+{text:"My patience is my power, and my persistence is my key to success."},
+{text:"I do not let negative situations steal my positive attitude."},
+{text:"Frustration is the fire that keeps me passionate and awake to the needs of others."},
+{text:"I understand that people make mistakes, and I choose understanding over anger."},
+{text:"I am building a better future, and good things take time to build."},
+{text:"When I feel frustrated, I remember why I wore this uniform in the first place."},
+{text:"I transform stress into strength and irritation into inspiration."},
+{text:"My goal is peace and order, and nothing can distract me from that mission."},
+{text:"I am stronger than any setback and bigger than any obstacle."},
+{text:"Frustration passes, but the honor of doing my duty well remains."},
+{text:"I work with what I have, and I make the best out of every situation."},
+{text:"I do not lose hope; I just find another way to reach the goal."},
+{text:"My mind is focused on service, so there is no room for lasting frustration."},
+{text:"I am an officer of the law, and I lead by example—calm, composed, and committed."},
+{text:"Every wrong I correct is a victory, no matter how small or how long it takes."},
+{text:"I use my feelings to drive me forward, not to hold me back."},
+{text:"Frustration is just a moment; my commitment is a lifetime."},
+{text:"I trust the process, I trust my training, and I trust in God’s timing."},
+{text:"I remain soft-hearted towards people but strong-minded towards challenges."},
+{text:"The road is rough, but the destination is worth every struggle."},
+{text:"I do not fight frustration; I rise above it and keep serving with a smile."},
+{text:"My resilience grows every time I overcome a difficult feeling or situation."},
+{text:"I am here to serve, and service requires a heart that is big enough to endure."},
+{text:"Frustration makes me humble, and humility makes me a better leader."},
+{text:"I look for the good in every situation and focus on that."},
+{text:"I am patient with others because I know how hard this job can be."},
+{text:"My peace of mind is more important than any problem I face today."},
+{text:"To Serve and Protect with patience, passion, and positivity—always."},
+{text: "Do not be quick in your spirit to be angry, for anger rests in the lap of fools.    - Ecclesiastes 7:9"},
+{text: "Refrain from anger and turn from wrath; do not fret—it leads only to evil.    - Psalm 37:8"},
+{text: "My soul is weary with sorrow; strengthen me according to Your word.    - Psalm 119:28"},
+{text: "I am worn out from my groaning. All night long I flood my bed with weeping and drench my couch with tears.    - Psalm 6:6"},
+{text: "Why, my soul, are you downcast? Why so disturbed within me? Put your hope in God, for I will yet praise Him, my Savior and my God.    - Psalm 42:11"},
+{text: "When I was overwhelmed within me, You knew my path.    - Psalm 142:3"},
+{text: "I say to God, my Rock: Why have You forgotten me? Why must I go about mourning, oppressed by the enemy?    - Psalm 42:9"},
+{text: "How long, Lord? Will You hide Yourself forever? How long will Your wrath burn like fire?    - Psalm 89:46"},
+{text: "I am exhausted from crying out; my throat is parched. My eyes fail, looking for my God.    - Psalm 69:3"},
+{text: "My eyes grow dim with waiting for Your promise; I say, 'When will You comfort me?'    - Psalm 119:82"},
+{text: "Why do You hide Your face and forget our misery and oppression?    - Psalm 44:24"},
+{text: "I cry out to You, Lord, but You do not answer; I stand up, but You only look at me.    - Job 30:20"},
+{text: "You have made my days a mere handbreadth; the span of my years is as nothing before You. Everyone is but a breath, even those who seem secure.    - Psalm 39:5"},
+{text: "All day long I have been afflicted, and every morning brings new punishments.    - Psalm 73:14"},
+{text: "I am like one who is deaf and does not hear, like one who is mute and cannot speak.    - Psalm 38:13"},
+{text: "My heart is in anguish within me; the terrors of death have fallen on me.    - Psalm 55:4"},
+{text: "How long must I wrestle with my thoughts and day after day have sorrow in my heart? How long will my enemy triumph over me?    - Psalm 13:2"},
+{text: "I have become a stranger to my brothers, an alien to my own mother’s sons.    - Psalm 69:8"},
+{text: "You have turned my friends against me; I am despised by those closest to me.    - Psalm 88:8"},
+{text: "My strength is dried up like a potsherd, and my tongue sticks to the roof of my mouth; You lay me in the dust of death.    - Psalm 22:15"},
+{text: "I look for sympathy, but there is none; for comforters, but I find none.    - Psalm 69:20"},
+{text: "They surround me with words of hatred; they attack me without cause.    - Psalm 109:3"},
+{text: "All who see me mock me; they hurl insults, shaking their heads.    - Psalm 22:7"},
+{text: "My enemies speak against me; those who wait to kill me plot together.    - Psalm 71:10"},
+{text: "For I endure scorn because of You, and shame covers my face.    - Psalm 69:7"},
+{text: "I am tired of my complaints; I cannot hold it in any longer.    - Job 7:11"},
+{text: "Though I cry, 'Violence!' I get no response; though I call for help, there is no justice.    - Job 19:7"},
+{text: "You have become my terror; on every side is confusion.    - Job 9:34"},
+{text: "The ropes of death entangled me; the snares of destruction confronted me.    - Psalm 18:4"},
+{text: "When my spirit grows faint within me, it is You who knows my way.    - Psalm 142:3"},
+{text: "You have seen how I suffer insult; You know all my sorrows.    - Psalm 69:19"},
+{text: "I am confined and cannot escape; my eyes are dim with grief.    - Psalm 88:8"},
+{text: "I am poured out like water, and all my bones are out of joint. My heart has turned to wax; it has melted away within me.    - Psalm 22:14"},
+{text: "Save me, O God, for the waters have come up to my neck.    - Psalm 69:1"},
+{text: "My days vanish like smoke; my bones burn like glowing embers.    - Psalm 102:3"},
+{text: "I lie awake and have become like a bird alone on a roof.    - Psalm 102:7"},
+{text: "My persecutors are fierce; they hunt me like a bird without cause.    - Psalm 119:161"},
+{text: "Deliver me from my enemies, Lord, for I hide myself in You.    - Psalm 143:9"},
+{text: "You know how I am scorned, disgraced and shamed; all my enemies are before You.    - Psalm 69:19"},
+{text: "For the wicked bend their bows; they set their arrows against the strings to shoot from the shadows at the upright in heart.    - Psalm 11:2"},
+{text: "The arrogant have dug pitfalls for me; they live contrary to Your law.    - Psalm 119:85"},
+{text: "Many are my persecutors and my foes, yet I have not turned from Your statutes.    - Psalm 119:157"},
+{text: "Rise up, Lord, confront them, bring them down; with Your sword rescue me from the wicked.    - Psalm 17:13"},
+{text: "My life is consumed by anguish and my years by groaning; my strength fails because of my affliction, and my bones grow weak.    - Psalm 31:10"},
+{text: "I am counted among those who go down to the pit; I am like one without strength.    - Psalm 88:4"},
+{text: "Trouble and distress have come upon me, but Your commands give me delight.    - Psalm 119:143"},
+{text: "They opposed me at every turn, yet I did not turn away from Your commands.    - Psalm 119:157"},
+{text: "I have seen the faithless and been filled with grief, for they do not keep Your word.    - Psalm 119:158"},
+{text: "My eyes fail, looking for Your salvation, and for Your righteous promise.    - Psalm 119:123"},
+{text: "All day long they twist my words; all their thoughts are bent on evil against me.    - Psalm 56:5"},
+{text: "Trouble and distress have come upon me, but Your commands give me delight.    - Psalm 119:143"},
+{text: "They opposed me at every turn, yet I did not turn away from Your commands.    - Psalm 119:157"},
+{text: "I have seen the faithless and been filled with grief, for they do not keep Your word.    - Psalm 119:158"},
+{text: "My eyes fail, looking for Your salvation, and for Your righteous promise.    - Psalm 119:123"},
+{text: "All day long they twist my words; all their thoughts are bent on evil against me.    - Psalm 56:5"},
+        ], color: "#219ebc"
+      },
+      "Fear": {
+        list: [
+  {text:"Fear is not a weakness, but a sign that I am about to do something brave and important."},
+{text:"I feel fear, but I choose to act anyway—that is what true courage is all about."},
+{text:"Fear is just my mind telling me to be careful, not to give up."},
+{text:"Every time I face my fears, I become stronger and more confident in my duty."},
+{text:"Fear cannot stop me, because my purpose to serve is bigger than any doubt."},
+{text:"I turn fear into focus, and doubt into determination."},
+{text:"Being brave does not mean being unafraid; it means moving forward even when I am scared."},
+{text:"Fear is a temporary feeling, but the honor of protecting others lasts forever."},
+{text:"I trust my training, my team, and God—they give me strength to overcome any fear."},
+{text:"Fear is like a shadow; it disappears when I step into the light of action."},
+{text:"I do not let fear control my steps; I control my steps despite fear."},
+{text:"The more I face challenges, the more I realize that fear is just an illusion I can overcome."},
+{text:"Fear reminds me that what I am doing matters, and that gives me the courage to continue."},
+{text:"I am not afraid of danger; I am afraid of failing the people who trust me."},
+{text:"Fear is the fire that tests my metal, and I come out stronger every time."},
+{text:"I breathe deeply, I stand tall, and I let courage lead the way."},
+{text:"Fear loses its power the moment I take one step forward."},
+{text:"My uniform is not just cloth; it is armor that gives me courage to face anything."},
+{text:"I choose to be a protector, not a prisoner of my fears."},
+{text:"Every act of courage starts with feeling fear and choosing to go on."},
+{text:"Fear is a signal to prepare well, not to retreat."},
+{text:"I know that I am not alone, and that knowledge drives away all fear."},
+{text:"Fear makes me alert, but courage makes me effective."},
+{text:"I face fear with a calm heart and a strong mind."},
+{text:"The greatest victory is not never feeling fear, but conquering it every day."},
+{text:"Fear is temporary, but the pride of doing my duty well is eternal."},
+{text:"I use fear as fuel to become a better officer and a better person."},
+{text:"When fear whispers 'you cannot', my heart shouts 'I must and I will'."},
+{text:"I am stronger than my fears, and bigger than any challenge."},
+{text:"Fear is just a visitor; I do not let it stay in my heart."},
+{text:"I trust in the path I have chosen, and that trust gives me courage."},
+{text:"Every time I overcome fear, I inspire others to be brave too."},
+{text:"Fear cannot dim my light; instead, it makes it shine brighter."},
+{text:"I am here to serve, and service requires a heart that is brave enough to endure."},
+{text:"Fear is not the end of the road; it is just a bend that leads to greater strength."},
+{text:"I do not fight fear; I rise above it and keep moving forward."},
+{text:"My courage grows with every step I take despite my fears."},
+{text:"Fear is a test, and I pass it by doing what is right."},
+{text:"I carry the hope of the people, and hope is stronger than any fear."},
+{text:"Fear makes me human, but courage makes me a hero."},
+{text:"I know that God is with me, so who or what can I fear?"},
+{text:"Fear is just an emotion; I am the one who decides how to respond to it."},
+{text:"I face every situation with courage, because I know I am doing what is good and just."},
+{text:"Fear cannot break my spirit; it only makes it more resilient."},
+{text:"I am ready, I am able, and I am brave enough to protect and serve."},
+{text:"Fear is a challenge, and challenges are opportunities to grow."},
+{text:"I keep my eyes on the goal, and fear fades away."},
+{text:"My courage is my greatest weapon against any danger or difficulty."},
+{text:"To Serve and Protect with courage, even when my heart beats fast with fear."},
+{text: "The Lord is my light and my salvation—whom shall I fear? The Lord is the stronghold of my life—of whom shall I be afraid?    - Psalm 27:1"},
+{text: "Even though I walk through the darkest valley, I will fear no evil, for You are with me; Your rod and Your staff, they comfort me.    - Psalm 23:4"},
+{text: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.    - Isaiah 41:10"},
+{text: "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.    - Joshua 1:9"},
+{text: "For God has not given us a spirit of fear, but of power and of love and of a sound mind.    - 2 Timothy 1:7"},
+{text: "Be strong and courageous. Do not be afraid or terrified because of them, for the Lord your God goes with you; He will never leave you nor forsake you.    - Deuteronomy 31:6"},
+{text: "When I am afraid, I put my trust in You.    - Psalm 56:3"},
+{text: "In God I trust and am not afraid. What can mere mortals do to me?    - Psalm 56:11"},
+{text: "So we say with confidence, 'The Lord is my helper; I will not be afraid. What can man do to me?'    - Hebrews 13:6"},
+{text: "Do not fear what they fear; do not be frightened.    - 1 Peter 3:14"},
+{text: "The Lord is with me; I will not be afraid. What can mere mortals do to me?    - Psalm 118:6"},
+{text: "You shall not be afraid of the terror by night, nor of the arrow that flies by day.    - Psalm 91:5"},
+{text: "A thousand may fall at your side, ten thousand at your right hand, but it will not come near you.    - Psalm 91:7"},
+{text: "Because you have made the Lord your dwelling place— the Most High, who is my refuge— no evil shall be allowed to befall you, no plague come near your tent.    - Psalm 91:9-10"},
+{text: "Fear not, for I have redeemed you; I have called you by name, you are mine.    - Isaiah 43:1"},
+{text: "When you pass through the waters, I will be with you; and through the rivers, they shall not overwhelm you; when you walk through fire you shall not be burned, and the flame shall not consume you.    - Isaiah 43:2"},
+{text: "Say to those who have an anxious heart, 'Be strong; fear not! Behold, your God will come with vengeance, with the recompense of God. He will come and save you.'    - Isaiah 35:4"},
+{text: "Peace I leave with you; My peace I give to you. Not as the world gives do I give to you. Let not your hearts be troubled, neither let them be afraid.    - John 14:27"},
+{text: "I have said these things to you, that in Me you may have peace. In the world you will have tribulation. But take heart; I have overcome the world.    - John 16:33"},
+{text: "The Lord is near to the brokenhearted and saves the crushed in spirit.    - Psalm 34:18"},
+{text: "He delivered me from my strong enemy, from those who hated me, for they were too mighty for me. They confronted me in the day of my calamity, but the Lord was my support.    - Psalm 18:17-18"},
+{text: "He will cover you with His pinions, and under His wings you will find refuge; His faithfulness is a shield and buckler.    - Psalm 91:4"},
+{text: "Do not be afraid of them, for the Lord your God fights for you.    - Deuteronomy 3:22"},
+{text: "Be on your guard, stand firm in the faith, be courageous, be strong.    - 1 Corinthians 16:13"},
+{text: "The Lord Himself goes before you and will be with you; He will never leave you nor forsake you. Do not be afraid; do not be discouraged.    - Deuteronomy 31:8"},
+{text: "Cast your burden on the Lord, and He will sustain you; He will never permit the righteous to be moved.    - Psalm 55:22"},
+{text: "You are my hiding place; You preserve me from trouble; You surround me with shouts of deliverance.    - Psalm 32:7"},
+{text: "Though an army encamp against me, my heart shall not fear; though war arise against me, yet I will be confident.    - Psalm 27:3"},
+{text: "Only fear the Lord and serve Him faithfully with all your heart. For consider what great things He has done for you.    - 1 Samuel 12:24"},
+{text: "There is no fear in love, but perfect love casts out fear. For fear has to do with punishment, and whoever fears has not been perfected in love.    - 1 John 4:18"},
+{text: "The fear of man lays a snare, but whoever trusts in the Lord is safe.    - Proverbs 29:25"},
+{text: "For you did not receive the spirit of slavery to fall back into fear, but you have received the Spirit of adoption as sons, by whom we cry, 'Abba! Father!'    - Romans 8:15"},
+{text: "But now thus says the Lord, He who created you, O Jacob, He who formed you, O Israel: 'Fear not, for I have redeemed you; I have called you by name, you are Mine.'    - Isaiah 43:1"},
+{text: "I sought the Lord, and He answered me; He delivered me from all my fears.    - Psalm 34:4"},
+{text: "The Lord is my strength and my shield; my heart trusts in Him, and I am helped. My heart exults, and with my song I give thanks to Him.    - Psalm 28:7"},
+{text: "You will keep him in perfect peace, whose mind is stayed on You, because he trusts in You.    - Isaiah 26:3"},
+{text: "The eternal God is your dwelling place, and underneath are the everlasting arms.    - Deuteronomy 33:27"},
+{text: "Be assured that an enemy will not prevail against you, nor will the wicked approach you.    - Psalm 92:11"},
+{text: "He will not be afraid of bad news; his heart is firm, trusting in the Lord.    - Psalm 112:7"},
+{text: "My help comes from the Lord, who made heaven and earth. He will not let your foot be moved; He who keeps you will not slumber.    - Psalm 121:2-3"},
+        ], color: "#2a9d8f"
+      },
+      "Exhaustion": {
+        list: [
+   {text:"Exhaustion is proof that I have been giving my all for the people and the country."},
+{text:"My tired body carries a heart that is still full of passion and purpose."},
+{text:"Rest is not giving up; it is recharging to serve even better tomorrow."},
+{text:"Every ache and fatigue is a mark of honor, showing how much I care."},
+{text:"I am tired, but I am not broken—my spirit remains strong and unshaken."},
+{text:"Exhaustion is just a signal that I am pushing my limits and growing stronger."},
+{text:"I pause to breathe, I rest to renew, and I rise to serve again."},
+{text:"The harder I work, the more I realize how much I am capable of giving."},
+{text:"My weariness fades when I see the peace and safety I help create."},
+{text:"Exhaustion is temporary, but the good I do lasts forever."},
+{text:"I listen to my body, I take care of myself, so I can take care of others longer."},
+{text:"Tiredness cannot stop me, because my mission is bigger than my fatigue."},
+{text:"Every step I take when I am tired is a step of courage and dedication."},
+{text:"I turn exhaustion into motivation—knowing that every effort counts."},
+{text:"My strength grows in the moments when I feel weak and weary."},
+{text:"Exhaustion is the price I pay for a life of meaning and service."},
+{text:"I rest not because I am weak, but because I want to be strong enough to continue."},
+{text:"Even when my eyes are heavy, my vision remains clear and focused."},
+{text:"I am proud of how hard I work, and I am grateful for the strength to keep going."},
+{text:"Exhaustion teaches me patience, balance, and the value of every moment of rest."},
+{text:"I do not fight my tiredness; I embrace it as part of the journey of service."},
+{text:"The more I give, the more I receive—strength, experience, and fulfillment."},
+{text:"My tiredness is a sign that I am alive, active, and making a difference."},
+{text:"I recharge my energy, but I never lose my enthusiasm for duty."},
+{text:"Exhaustion may slow me down, but it will never make me turn back."},
+{text:"I carry on because I know that the people need me, and that is enough."},
+{text:"Every time I rest, I come back with more power and more love to serve."},
+{text:"My body may be tired, but my mind is sharp and my heart is warm."},
+{text:"Exhaustion is not the end; it is just a chapter in my story of service."},
+{text:"I work hard, I rest well, and I serve with all my might—always."},
+{text:"Tiredness is just a feeling, but my commitment is a choice I make every day."},
+{text:"I transform fatigue into fortitude and weariness into wisdom."},
+{text:"Exhaustion shows me how much I love what I do and who I serve."},
+{text:"I stand tall even when I am tired, because I stand for justice and peace."},
+{text:"My resilience is built every time I overcome the urge to quit when I am weary."},
+{text:"Exhaustion is a reminder that I am human, but my duty makes me extraordinary."},
+{text:"I keep going, one step at a time, because every step brings hope to someone."},
+{text:"Rest is part of the work, and work is part of my life’s calling."},
+{text:"Exhaustion cannot dim my light; it only makes it shine with more meaning."},
+{text:"I am tired, but I am happy—happy to be able to serve and protect."},
+{text:"My strength comes not from never being tired, but from rising every time I rest."},
+{text:"Exhaustion is the fire that tempers my spirit and makes me durable."},
+{text:"I do not let tiredness steal my smile or my dedication to others."},
+{text:"Every moment of fatigue is replaced by a moment of pride and satisfaction."},
+{text:"I am built to serve, and even when I am tired, I am still ready."},
+{text:"Exhaustion passes, but the legacy of my service remains."},
+{text:"I take care of myself so I can take care of the nation—this is my responsibility."},
+{text:"My tiredness is a small price to pay for the safety and happiness of many."},
+{text:"I face exhaustion with grace, and I overcome it with faith and perseverance."},
+{text:"To Serve and Protect, even when my body cries for rest—this is my promise."},
+{text: "Come to Me, all you who labor and are heavy laden, and I will give you rest.    - Matthew 11:28"},
+{text: "He gives power to the faint, and to him who has no might He increases strength.    - Isaiah 40:29"},
+{text: "Even youths grow tired and weary, and young men stumble and fall; but those who hope in the Lord will renew their strength.    - Isaiah 40:30-31"},
+{text: "My flesh and my heart may fail, but God is the strength of my heart and my portion forever.    - Psalm 73:26"},
+{text: "I am weary with my groaning; all night I make my bed swim; I drench my couch with my tears.    - Psalm 6:6"},
+{text: "When I am overwhelmed, You know my way.    - Psalm 142:3"},
+{text: "My soul is weary with sorrow; strengthen me according to Your word.    - Psalm 119:28"},
+{text: "We do not lose heart. Though outwardly we are wasting away, yet inwardly we are being renewed day by day.    - 2 Corinthians 4:16"},
+{text: "Let us not grow weary while doing good, for in due season we shall reap if we do not lose heart.    - Galatians 6:9"},
+{text: "For even when we were with you, we commanded you this: If anyone will not work, neither shall he eat.    - 2 Thessalonians 3:10"},
+{text: "I am worn out from my sighing; every day I call to You, Lord, I spread out my hands to You.    - Psalm 88:9"},
+{text: "My strength is dried up like a potsherd, and my tongue sticks to the roof of my mouth; You lay me in the dust of death.    - Psalm 22:15"},
+{text: "I have labored to no purpose; I have spent my strength in vain and for nothing. Yet what is due me is in the Lord’s hand, and my reward is with my God.    - Isaiah 49:4"},
+{text: "My eyes grow dim waiting for Your promise; I ask, 'When will You comfort me?'    - Psalm 119:82"},
+{text: "I am tired of my complaints; I cannot hold it in any longer.    - Job 7:11"},
+{text: "All day long I have been afflicted, and every morning brings new trials.    - Psalm 73:14"},
+{text: "My heart is in anguish within me; the terrors of death have fallen on me.    - Psalm 55:4"},
+{text: "I have become weary in my calling; I have endured hardship and fatigue.    - 2 Corinthians 11:27"},
+{text: "You have made me work hard for nothing, and my eyes have grown dim in service.    - Lamentations 3:16"},
+{text: "My life is consumed by anguish and my years by groaning; my strength fails because of my affliction, and my bones grow weak.    - Psalm 31:10"},
+{text: "I am poured out like water, and all my bones are out of joint; my heart is like wax, melting within me.    - Psalm 22:14"},
+{text: "I lie awake and have become like a bird alone on a roof.    - Psalm 102:7"},
+{text: "My days vanish like smoke; my bones burn like glowing embers.    - Psalm 102:3"},
+{text: "I am exhausted from crying for help; my throat is parched. My eyes fail, looking for my God.    - Psalm 69:3"},
+{text: "Cast your burden on the Lord, and He will sustain you; He will never let the righteous be shaken.    - Psalm 55:22"},
+{text: "The Lord is my strength and my shield; my heart trusts in Him, and He helps me.    - Psalm 28:7"},
+{text: "He gives His beloved sleep.    - Psalm 127:2"},
+{text: "There remains therefore a rest for the people of God.    - Hebrews 4:9"},
+{text: "The joy of the Lord is your strength.    - Nehemiah 8:10"},
+{text: "For He satisfies the longing soul, and fills the hungry soul with goodness.    - Psalm 107:9"},
+{text: "You are my hiding place and my shield; I hope in Your word.    - Psalm 119:114"},
+{text: "When my spirit grows faint within me, it is You who knows my path.    - Psalm 142:3"},
+{text: "I will refresh the weary and satisfy the faint.    - Jeremiah 31:25"},
+{text: "For thus says the Lord God, the Holy One of Israel: 'In returning and rest you shall be saved; in quietness and confidence shall be your strength.'    - Isaiah 30:15"},
+{text: "My soul finds rest in God alone; my salvation comes from Him.    - Psalm 62:1"},
+{text: "But You, Lord, do not be far from me. You are my strength; come quickly to help me.    - Psalm 22:19"},
+{text: "I have fought the good fight, I have finished the race, I have kept the faith.    - 2 Timothy 4:7"},
+{text: "And let us run with endurance the race that is set before us.    - Hebrews 12:1"},
+{text: "My help comes from the Lord, who made heaven and earth.    - Psalm 121:2"},
+{text: "He will not allow your foot to be moved; He who keeps you will not slumber.    - Psalm 121:3"},
+{text: "The Lord shall preserve your going out and your coming in from this time forth and forevermore.    - Psalm 121:8"},
+{text: "For You have been a strength to the poor, a strength to the needy in his distress, a refuge from the storm, a shade from the heat.    - Isaiah 25:4"},
+{text: "Blessed is the man who endures temptation; for when he has been approved, he will receive the crown of life.    - James 1:12"},
+{text: "In the day of my trouble I will call upon You, for You will answer me.    - Psalm 86:7"},
+{text: "I can do all things through Christ who strengthens me.    - Philippians 4:13"},
+{text: "God is our refuge and strength, a very present help in trouble.    - Psalm 46:1"},
+{text: "The eternal God is your refuge, and underneath are the everlasting arms.    - Deuteronomy 33:27"},
+{text: "You have seen my labor and my toil; establish my work, O Lord.    - Psalm 90:17"},
+{text: "He makes me lie down in green pastures; He leads me beside quiet waters. He restores my soul.    - Psalm 23:2-3"},
+        ], color: "#ff006e"
+      },
+      "Resentment": {
+        list: [
+  {text:"Resentment is a sign that I care deeply about justice and what is right."},
+{text:"I do not let bitterness take root; I turn it into motivation to do better."},
+{text:"Holding onto anger only weighs me down, so I choose to let go and rise."},
+{text:"Resentment teaches me to understand others and grow in patience."},
+{text:"I forgive not because they deserve it, but because I deserve peace."},
+{text:"My heart is too big to carry grudges; it is meant to serve and love."},
+{text:"Resentment is a fire that can burn me, so I turn it into light instead."},
+{text:"I focus on what I can build, not on what was broken."},
+{text:"Every hurt is a chance to practice mercy and strengthen my character."},
+{text:"I leave the past behind and walk forward with a clean heart."},
+{text:"Resentment cannot stop my mission; it only makes my purpose clearer."},
+{text:"I choose understanding over judgment, and kindness over anger."},
+{text:"My peace is more important than proving I was right."},
+{text:"Resentment is temporary, but the honor of serving lasts forever."},
+{text:"I use my feelings to become more compassionate, not more bitter."},
+{text:"I am here to heal, not to hold onto pain."},
+{text:"Resentment blinds the mind, but forgiveness opens the eyes of wisdom."},
+{text:"I do not waste energy on what I cannot change; I use it to make a difference."},
+{text:"Every time I let go, I become lighter and stronger."},
+{text:"Resentment is a chain, and forgiveness is the key that sets me free."},
+{text:"I am an officer of peace, so I carry peace in my heart too."},
+{text:"My duty is to protect, not to punish with my feelings."},
+{text:"Resentment shows me where I need to grow, and I embrace that lesson."},
+{text:"I turn disappointment into determination and hurt into hope."},
+{text:"I choose to be part of the solution, not the source of negativity."},
+{text:"Resentment may come, but it does not stay—my love for service is stronger."},
+{text:"I trust that God is in control, and that gives me peace to let go."},
+{text:"My strength is not in being angry, but in being able to forgive."},
+{text:"Resentment is like drinking poison; I choose life and joy instead."},
+{text:"I look for the good in people, even when they have wronged me."},
+{text:"I am building a better future, and there is no room for bitterness there."},
+{text:"Resentment tests my character, and I pass with grace and dignity."},
+{text:"I channel my energy into serving, not into resenting."},
+{text:"My heart remains soft, even when life has been hard."},
+{text:"Resentment is a moment; my commitment is a lifetime."},
+{text:"I forgive others as I hope to be forgiven."},
+{text:"I do not let negative feelings steal my smile or my passion."},
+{text:"Resentment makes me humble, and humility makes me a better leader."},
+{text:"I focus on the present and the good I can do today."},
+{text:"My peace of mind is my greatest asset in this service."},
+{text:"Resentment cannot break my spirit; it only makes it more resilient."},
+{text:"I choose to be happy, not to be right."},
+{text:"I understand that people make mistakes, and I choose mercy."},
+{text:"Resentment is a burden I no longer want to carry."},
+{text:"I rise above anger and walk in the light of service."},
+{text:"My love for my country and people is bigger than any hurt or grievance."},
+{text:"I turn resentment into fuel to work harder for a better society."},
+{text:"I am free when I let go, and freedom helps me serve better."},
+{text:"To Serve and Protect with a heart full of forgiveness and love—always."},
+{text: "Resentment kills a fool, and envy slays the simple.    - Job 5:2"},
+{text: "Get rid of all bitterness, rage and anger, brawling and slander, along with every form of malice.    - Ephesians 4:31"},
+{text: "See to it that no one falls short of the grace of God and that no bitter root grows up to cause trouble and defile many.    - Hebrews 12:15"},
+{text: "A heart at peace gives life to the body, but envy rots the bones.    - Proverbs 14:30"},
+{text: "Refrain from anger and turn from wrath; do not fret—it leads only to evil.    - Psalm 37:8"},
+{text: "Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.    - Ephesians 4:32"}, 
+{text: "Do not let any unwholesome talk come out of your mouths, but only what is helpful for building others up according to their needs.    - Ephesians 4:29"},
+{text: "In your anger do not sin; do not let the sun go down while you are still angry.    - Ephesians 4:26"},
+{text: "My heart is bitter, and I know why I am resentful; I am troubled and cannot speak.    - Job 7:11"},
+{text: "Why do you complain against Him? He does not answer for any of man’s offenses.    - Job 33:13"},
+{text: "You have made me suffer wrong; I am worn out by your harshness.    - Job 19:3"},
+{text: "All day long my enemies taunt me; those who rail against me use my name as a curse.    - Psalm 102:8"},
+{text: "I am scorned by all my enemies and despised by my neighbors— even my friends are afraid of me.    - Psalm 31:11"},
+{text: "They repay me evil for good, and hatred for my friendship.    - Psalm 109:5"},
+{text: "Do not say, 'I’ll pay you back for this wrong!' Wait for the Lord, and He will deliver you.    - Proverbs 20:22"},
+{text: "Do not take revenge, my dear friends, but leave room for God’s wrath, for it is written: 'It is mine to avenge; I will repay,' says the Lord.    - Romans 12:19"},
+{text: "A hot-tempered person stirs up conflict, but the one who is patient calms a quarrel.    - Proverbs 15:18"},
+{text: "Whoever is patient has great understanding, but one who is quick-tempered displays folly.    - Proverbs 14:29"},
+{text: "A gentle answer turns away wrath, but a harsh word stirs up anger.    - Proverbs 15:1"},
+{text: "Better a patient person than a warrior, one with self-control than one who takes a city.    - Proverbs 16:32"},
+{text: "Do not be quickly provoked in your spirit, for anger resides in the lap of fools.    - Ecclesiastes 7:9"},
+{text: "Hatred stirs up conflict, but love covers over all wrongs.    - Proverbs 10:12"},
+{text: "The beginning of strife is like letting out water, so quit before a quarrel starts.    - Proverbs 17:14"},
+{text: "It is to one’s honor to avoid strife, but every fool is quick to quarrel.    - Proverbs 20:3"},
+{text: "Whoever guards his mouth and tongue keeps his soul from troubles.    - Proverbs 21:23"},
+{text: "An angry person stirs up conflict, and a hot-tempered person commits many sins.    - Proverbs 29:22"},
+{text: "For if you forgive other people when they sin against you, your heavenly Father will also forgive you.    - Matthew 6:14"}, 
+{text: "Bear with each other and forgive one another if any of you has a grievance against someone. Forgive as the Lord forgave you.    - Colossians 3:13"}, 
+{text: "The Lord’s servant must not be quarrelsome but must be kind to everyone, able to teach, not resentful.    - 2 Timothy 2:24"},
+{text: "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It keeps no record of wrongs.    - 1 Corinthians 13:4-5"},
+{text: "Do not judge, and you will not be judged. Do not condemn, and you will not be condemned. Forgive, and you will be forgiven.    - Luke 6:37"},
+{text: "Bless those who curse you, pray for those who mistreat you.    - Luke 6:28"},
+{text: "When you stand praying, if you hold anything against anyone, forgive them, so that your Father in heaven may forgive you your sins.    - Mark 11:25"},
+{text: "Let all bitterness, wrath, anger, clamor, and evil speaking be put away from you, with all malice.    - Ephesians 4:31"},
+{text: "But now you must also rid yourselves of all such things as these: anger, rage, malice, slander, and filthy language from your lips.    - Colossians 3:8"},
+{text: "Do not repay anyone evil for evil. Be careful to do what is right in the eyes of everyone.    - Romans 12:17"},
+{text: "If it is possible, as far as it depends on you, live at peace with everyone.    - Romans 12:18"},
+{text: "Let us therefore make every effort to do what leads to peace and to mutual edification.    - Romans 14:19"},
+{text: "My dear brothers and sisters, take note of this: Everyone should be quick to listen, slow to speak and slow to become angry.    - James 1:19"},
+{text: "For man’s anger does not bring about the righteous life that God desires.    - James 1:20"},
+{text: "What causes fights and quarrels among you? Don’t they come from your desires that battle within you?    - James 4:1"},
+{text: "Resentment destroys the heart; it is like a poison that eats away your strength and peace.    - Proverbs 18:14"},
+{text: "Better is a dry morsel with quietness, than a house full of feasting with strife.    - Proverbs 17:1"},
+{text: "A brother wronged is more unyielding than a fortified city; disputes are like the bars of a castle.    - Proverbs 18:19"},
+{text: "He who covers an offense promotes love, but whoever repeats the matter separates close friends.    - Proverbs 17:9"},
+{text: "Whoever loves discipline loves knowledge, but he who hates correction is stupid.    - Proverbs 12:1"},
+{text: "A fool gives full vent to his anger, but a wise man keeps himself under control.    - Proverbs 29:11"},
+{text: "Do not say, 'I will do to them as they have done to me; I will pay them back for what they did.'    - Proverbs 24:29"},
+{text: "As water reflects the face, so one’s life reflects the heart.    - Proverbs 27:19"},
+{text: "Peacemakers who sow in peace reap a harvest of righteousness.    - James 3:18"},
+        ], color: "#06d6a0"
+      }
+    };
+
+    function showVerse(emotion) {
+      const verseSet = verses[emotion];
+      const random = verseSet.list[Math.floor(Math.random() * verseSet.list.length)];
+      const box = document.getElementById("verseBox");
+      box.innerHTML = `<div class="text">"${random.text}</div>`;
+      box.classList.remove("show");
+      void box.offsetWidth;
+      box.classList.add("show");
+      document.body.style.backgroundColor = verseSet.color;
+    }
+
+     function openAbout() {
+      document.getElementById("aboutModal").style.display = "flex";
+    }
+    function closeAbout() {
+      document.getElementById("aboutModal").style.display = "none";
+    }
+ function openContact() {
+      document.getElementById("ContactModal").style.display = "flex";
+    }
+    function closeContact() {
+      document.getElementById("ContactModal").style.display = "none";
+    }
+
+    // New functions for the Mission, Vision, and Core Values Modal
+    function openMissionVisionModal() {
+      document.getElementById("missionVisionModal").style.display = "flex";
+    }
+    function closeMissionVisionModal() {
+      document.getElementById("missionVisionModal").style.display = "none";
+    }
+
+    // Event listeners for closing modals when clicking outside
+    window.onclick = function(event) {
+      const aboutModal = document.getElementById("aboutModal");
+      const missionVisionModal = document.getElementById("missionVisionModal");
+      if (event.target === aboutModal) {
+        aboutModal.style.display = "none";
+      }
+      if (event.target === missionVisionModal) {
+        missionVisionModal.style.display = "none";
+      }
+    }
+
+    // Event listener for the new Mission, Vision, and Core Values button
+    document.getElementById("openMissionVisionModal").onclick = function() {
+      openMissionVisionModal();
+    }
+  </script>
+</body>
+</html>
+
